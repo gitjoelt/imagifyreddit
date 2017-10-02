@@ -1,0 +1,14 @@
+{
+  "name": "redditonepic",
+  "version": "1.0.0",
+  "description": "Gets a picture from a subreddit of the users choosing",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Joel",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.16.2"
+  }
+}
