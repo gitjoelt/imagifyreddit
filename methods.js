@@ -2,25 +2,17 @@ https = require('https');
 axios = require('axios');
 url = require('url');
 
-function getURLPath(request){
-	const urlOptions = url.parse(request.url);
-	return urlOptions.path;
-}
-
-function getQueryFromURLPath(path){
-	return path.replace('/','');
-}
 
 function getValues(query, callback){
 
 	axios.get(`https://reddit.com/r/${query}.json?limit=60`)
 	.then((response) => {
 		if(response.data){
-			const pictureData = parseValues(response.data);
-			if(pictureData){
-				callback(pictureData);
+			const pictureJSON = getImages(response.data);
+			if(pictureJSON){
+				callback(pictureJSON);
 			} else {
-				callback({ 'error': `Unable to find pictures for ${query}` });
+				callback([{ 'error': `Unable to find pictures for ${query}` }]);
 			}
 		}
 	})
@@ -30,27 +22,19 @@ function getValues(query, callback){
 
 }
 
-function parseValues(apiResponse){
+function getImages(apiResponse){
 
-	let images = getImages(apiResponse);
+	let images = findImages(apiResponse);
 
 	if(images.length > 0){
 		
-		const index = pickRandom(images);
-		console.dir(images);
-
-		return {
-
-			'title': images[index].title,
-			'imgsrc': images[index].imgsrc,
-			'author': images[index].author
-		};
+		return images;
 
 	} else { return false; }
 
 }
 
-function getImages(apiResponse){
+function findImages(apiResponse){
 	
 	let images = [];
 
@@ -74,6 +58,4 @@ function pickRandom(pictureArray){
 	return Math.floor(Math.random() * ((pictureArray.length - 1) - 0) + 0);
 }
 
-module.exports.getURLPath = getURLPath;
-module.exports.getQueryFromURLPath = getQueryFromURLPath;
 module.exports.getValues = getValues;
