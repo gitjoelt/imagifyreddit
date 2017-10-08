@@ -1,14 +1,12 @@
 https = require('https');
 axios = require('axios');
-url = require('url');
 
+function getValues(query, options, callback){
 
-function getValues(query, callback){
-
-	axios.get(`https://reddit.com/r/${query}.json?limit=60`)
+	axios.get(`https://reddit.com/r/${query}.json?limit=100`)
 	.then((response) => {
 		if(response.data){
-			const pictureJSON = getImages(response.data);
+			const pictureJSON = getImages(response.data, options);
 			if(pictureJSON){
 				callback(pictureJSON);
 			} else {
@@ -17,14 +15,15 @@ function getValues(query, callback){
 		}
 	})
 	.catch((error) => {
-		callback({ 'error': error });
+		callback([{ 'error': error.message }]);
 	});
 
 }
 
-function getImages(apiResponse){
+function getImages(apiResponse, options){
 
-	let images = findImages(apiResponse);
+
+	let images = findImages(apiResponse, options);
 
 	if(images.length > 0){
 		
@@ -34,24 +33,57 @@ function getImages(apiResponse){
 
 }
 
-function findImages(apiResponse){
+function findImages(apiResponse, options){
 	
 	let images = [];
 
-	apiResponse.data.children.forEach((post) => {
-		if(acceptableExtension(post.data.url)){
-			images.push({ 'title': post.data.title, 'imgsrc': post.data.url, 'author': post.data.author});
+	apiResponse.data.children.forEach(function(post){
+
+		//NSFW mode
+		if(!options.sfw){
+			if(acceptableExtension(post.data.url, options)){
+				images.push({ 'title': post.data.title, 
+							  'imgsrc': post.data.url, 
+							  'author': post.data.author });
+			}
+		//SFW mode
+		} else if (post.data.over_18 === false) {
+			if(acceptableExtension(post.data.url, options)){
+				images.push({ 'title': post.data.title, 
+							  'imgsrc': post.data.url, 
+							  'author': post.data.author });
+			}
 		}
+
 	});
 
 	return images;
 }
 
-function acceptableExtension(url){
+function acceptableExtension(url, options){
+	
+
 	const ext = url.substring((url.length - 3), url.length);
+
+	if(options.gfy){
+		if(url.indexOf('gfycat.com') !== -1){
+			return true;
+		}
+	}
+
+	if(options.gifv){
+		if(ext === "ifv"){
+			return true;
+		}
+	}
+
 	if(ext === 'jpg' || ext === 'gif'){
 		return true;
-	} else { return false; }
+	}
+
+
+	return false;
+
 }
 
 function pickRandom(pictureArray){

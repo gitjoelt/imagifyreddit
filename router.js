@@ -1,5 +1,6 @@
-render = require('./renderer.js');
-lib = require('./methods.js');
+const render = require('./renderer.js');
+const lib = require('./methods.js');
+const url = require('url');
 
 function home(request, response){
 
@@ -36,15 +37,18 @@ function home(request, response){
 
 function subreddit(request, response){
 
-	let query = request.url.replace('/','');
+	const urlData = url.parse(request.url, true);
+	let query = urlData.pathname.replace('/','');
+	let options = {};
 
 	if(query.length > 0 && query !== 'favicon.ico' && 
 	   query.indexOf('.css') === -1 && request.url.indexOf('.js') === -1)
 	{
 
+		options = urlData.query;
 		response.setHeader('Content-Type', 'application/json');
 
-		lib.getValues(query, (values) => {
+		lib.getValues(query, options, (values) => {
 			
 			response.write(JSON.stringify(values));
 			response.end();

@@ -7,6 +7,15 @@ body{
 }
 
 
+h4{
+	font-size:105%;
+	margin:0 0 5px;
+}
+
+.picture, .picture img, .picture video{
+	width:100%;
+}
+
 .errorHeader{
 	background:#FF4C4C;
 	color:white;
@@ -17,6 +26,7 @@ body{
 	width:100%;
 	display:none;
 }
+
 .onePicContainer{
 	position:relative;
 	margin:15px auto;
@@ -35,10 +45,6 @@ body{
 	display:none;
 }
 
-.onePicContainer img{
-	width:100%;
-	display:none;
-}
 
 .onePicContainer h3{
 	font-size:160%;
@@ -46,6 +52,7 @@ body{
 	margin:0;
 	padding-bottom:3px;
 }
+
 .onePicContainer p.author{
 	font-size:90%;
 	color:#666;
@@ -55,6 +62,7 @@ body{
 #controls{
 	text-align:right;
 }
+
 .button{
 	font-size:90%;
 	text-align:center;
@@ -67,14 +75,15 @@ body{
 	-moz-border-radius: 5px;
 	border-radius: 5px;
 }
+
 .next{
-	background:#b452ff;
+	background:#45cae7;
 	color:white;
 	width:125px;
 }
 
 .next:hover{
-	background:#9d1fff;
+	background:#26aecc;
 }
 
 .previous{
@@ -110,4 +119,49 @@ body{
 	text-align:center;
 	font-size:110%;
 	margin:30px 0;
+}
+
+.preferences{
+	margin-bottom:15px;
+}
+
+.mute{
+	color:#666;
+}
+
+.mute:hover{
+	color:#444;
+}
+
+.warning{
+	display:none;
+	color:#666;
+}
+
+
+/*checkbox 
+Source: https://webdesign.tutsplus.com/articles/quick-tip-easy-css3-checkboxes-and-radio-buttons--webdesign-8953
+*/
+input[type="checkbox"] {
+    display:none;
+}
+
+input[type="checkbox"] + label {
+    color:#666;
+    font-weight:bold;
+    padding-right:8px;
+}
+
+input[type="checkbox"] + label span {
+    display:inline-block;
+    width:19px;
+    height:19px;
+    margin:-2px 5px 0 0;
+    vertical-align:middle;
+    background:url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/210284/check_radio_sheet.png) left top no-repeat;
+    cursor:pointer;
+}
+
+input[type="checkbox"]:checked + label span {
+    background:url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/210284/check_radio_sheet.png) -19px top no-repeat;
 }

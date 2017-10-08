@@ -1,15 +1,30 @@
 
 $(document).ready(function(){
 
+	/******************************
+	Init
+	******************************/
+
 	let next = $('.next');
 	let prev = $('.previous');
-	let input = "";
+	let gifv = $('#gifv');
+	let gfy = $('#gfy');
+	let sfw = $('#sfw');
+	let checkboxes = $('input[type=checkbox]');
+	let options = getCheckboxStateFromStorage();
+	setCheckboxState(options);
+
+
+	/******************************
+	User Input & Initial Load
+	******************************/
 
 	getUsersSearch(function(input){
 
 		renderLoading();
+		options = getCheckboxState();
 
-		getImagesJSON(input, function(JSON){
+		getImagesJSON(input, options, function(JSON){
 			//subreddit exists and it has pictures
 			if(!JSON[0].error){
 				destroyStorage();
@@ -27,6 +42,11 @@ $(document).ready(function(){
 		render(index);
 	}
 
+
+	/******************************
+	Controls
+	******************************/
+
 	next.click(function(){
 
 		let nextIndex = nextImage(getIndex());
@@ -41,5 +61,31 @@ $(document).ready(function(){
 
 	});
 
+	checkboxes.click(function(){
+		
+		let input = $('.searchBox').val();
+		options = getCheckboxState();
+		saveCheckboxState(options);
+
+		if(input.length > 2){
+
+			renderLoading();
+
+			getImagesJSON(input, options, function(JSON){
+				//subreddit exists and it has pictures
+				if(!JSON[0].error){
+					destroyStorage();
+					saveToStorage(JSON);
+					render(0);
+				} else {
+					renderError();
+				}
+			});
+		}
+
+	});
+
+	renderWarning($('#imgPref'),'dataWarning');
+	renderWarning($('#sfwPref'),'nsfwWarning');
 
 });

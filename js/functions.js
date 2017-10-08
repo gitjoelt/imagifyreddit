@@ -24,11 +24,37 @@ function getUsersSearch(callback){
 }
 
 
-function getImagesJSON(query, callback){
+function getImagesJSON(query, options, callback){
 
-	$.get(`/${query}`, (data) => {
-		callback(data);
-	});
+	const urlParams = generateUrlParameters(options);
+
+	if(!urlParams){
+		$.get(`/${query}`, (data) => {
+			callback(data);
+		});
+	} else {
+		$.get(`/${query}?${urlParams}`, (data) => {
+			callback(data);
+		});
+	}
+
+}
+
+function generateUrlParameters(options){
+
+	let urlParams = "";
+	for (let key in options) {
+	    
+	    if (urlParams != "") {
+	        urlParams += "&";
+	    }
+	    
+	    if(options[key]){
+	    	urlParams += key + "=" + encodeURIComponent(options[key]);
+		}
+	}
+
+	return urlParams;
 }
 
 function isStored(){
@@ -54,6 +80,50 @@ function destroyStorage(){
 	sessionStorage.removeItem('size');
 }
 
+function getCheckboxState(){
+	return { gifv: $('#gifv').is(':checked'), 
+			 gfy: $('#gfy').is(':checked'),
+			 sfw: $('#sfw').is(':checked') };
+}
+
+function getCheckboxStateFromStorage(){
+	
+	const gfy = localStorage.getItem('gfy');
+	const gifv = localStorage.getItem('gifv');
+	const sfw = localStorage.getItem('sfw');
+
+	return { gifv: gifv, gfy: gfy, sfw: sfw };
+}
+
+function saveCheckboxState(options){
+	
+	if(options.gifv){
+		localStorage.setItem('gifv','checked');
+	} else { localStorage.removeItem('gifv'); }
+	
+	if(options.gfy){
+		localStorage.setItem('gfy', 'checked');
+	} else { localStorage.removeItem('gfy'); }
+
+	if(options.sfw){
+		localStorage.setItem('sfw', 'checked');
+	} else { localStorage.removeItem('sfw'); }
+}
+
+function setCheckboxState(options){
+	
+	if(options.gifv){
+		$('#gifv').prop('checked', true);
+	}
+	
+	if(options.gfy){
+		$('#gfy').prop('checked', true);
+	} 
+
+	if(options.sfw){
+		$('#sfw').prop('checked', true);
+	} 
+}
 
 function getIndex(){
 	return parseInt(sessionStorage.getItem('index'));
@@ -72,8 +142,9 @@ function render(index){
 	$('#controls').show();
 	$('h3.title').text(subredditData[index].title);
 	$('p.author').text('Posted by: ' + subredditData[index].author);
-	$('img.picture').show();
-	$('img.picture').attr('src', subredditData[index].imgsrc);
+	
+	prepareMedia(subredditData[index].imgsrc);
+	$('.picture').show();
 }
 
 function renderLoading(){
@@ -83,7 +154,7 @@ function renderLoading(){
 	$('#controls').hide();
 	$('h3.title').html('<i class="fa fa-spin fa-circle-o-notch" aria-hidden="true"></i> Gathering Images...');
 	$('p.author').text('');
-	$('img.picture').hide();
+	$('.picture').hide();
 }
 
 function renderError(){
@@ -92,6 +163,14 @@ function renderError(){
 	$('.errorHeader').html('<i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Unable to retrieve pictures from that subreddit');
 	$('.errorHeader').fadeIn(100);
 
+}
+
+function renderWarning(jQueryObject, cssClass){
+	jQueryObject.hover(function(){
+		$('.' + cssClass).show();
+	}, function(){
+		$('.' + cssClass).hide();
+	});
 }
 
 function nextImage(index){
@@ -116,4 +195,37 @@ function previousImage(index){
 
 	sessionStorage.setItem('index', index.toString());
 	return index;
+}
+
+function prepareMedia(src){
+
+	const ext = src.substring((src.length - 3), src.length);
+
+	if(src.indexOf('gfycat.com') !== -1){
+		let mp4src = prepareGfycat(src);
+		$('.picture').html("<video preload='auto' autoplay='autoplay' loop='loop'><source src='" + mp4src + "' type='video/mp4'></video>");
+	}
+	
+
+	if(ext === "ifv"){
+		let mp4src = prepareGifv(src);
+		$('.picture').html("<video preload='auto' autoplay='autoplay' loop='loop'><source src='" + mp4src + "' type='video/mp4'></video>");
+	}
+
+
+	if(ext === 'jpg' || ext === 'gif'){
+		$('.picture').html("<img src='" + src + "' />");
+	}
+
+	return false;
+}
+
+function prepareGifv(src){
+	let noExt = src.substring(0,(src.length - 4));
+	return noExt + 'mp4';
+}
+
+function prepareGfycat(src){
+	let mp4src = src.replace('gfycat.com','giant.gfycat.com');
+	return mp4src + '.mp4';
 }
