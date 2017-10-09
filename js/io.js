@@ -26,7 +26,7 @@ $(document).ready(function(){
 
 		getImagesJSON(input, options, function(JSON){
 			//subreddit exists and it has pictures
-			if(!JSON[0].error){
+			if(JSON.posts){
 				destroyStorage();
 				saveToStorage(JSON);
 				render(0);
@@ -73,7 +73,7 @@ $(document).ready(function(){
 
 			getImagesJSON(input, options, function(JSON){
 				//subreddit exists and it has pictures
-				if(!JSON[0].error){
+				if(JSON.posts){
 					destroyStorage();
 					saveToStorage(JSON);
 					render(0);
@@ -85,7 +85,9 @@ $(document).ready(function(){
 
 	});
 
-	renderWarning($('#imgPref'),'dataWarning');
-	renderWarning($('#sfwPref'),'nsfwWarning');
+	if($(window).width() > 1024){
+		renderWarning($('#imgPref'),'dataWarning');
+		renderWarning($('#sfwPref'),'nsfwWarning');
+	}
 
 });

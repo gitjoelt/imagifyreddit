@@ -74,12 +74,12 @@ h4{
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
 	border-radius: 5px;
+	width:125px;
 }
 
 .next{
 	background:#45cae7;
 	color:white;
-	width:125px;
 }
 
 .next:hover{
@@ -89,7 +89,6 @@ h4{
 .previous{
 	background:#f5f5f5;
 	color:#555;
-	width:125px;
 }
 
 .previous:hover{
@@ -164,4 +163,40 @@ input[type="checkbox"] + label span {
 
 input[type="checkbox"]:checked + label span {
     background:url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/210284/check_radio_sheet.png) -19px top no-repeat;
+}
+
+
+@media only screen and (max-width: 1024px) {
+	body{
+		padding:0px 15px;
+		font-size:14px;
+	}
+
+	.btt{
+		position:relative;
+		right:0;
+		bottom:0;
+		display:block;
+		margin:25px auto 25px 0;
+	}
+
+	.button{
+		margin:15px 0 0;
+		width:40%;
+		float:none;
+	}
+
+	.next{
+		float:right;
+	}
+	.previous{
+		float:left;
+	}
+}
+
+@media only screen and (max-width: 720px) {
+	body{
+		padding:0px 15px;
+		font-size:12.5px;
+	}
 }

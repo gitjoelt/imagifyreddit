@@ -68,9 +68,24 @@ function isStored(){
 
 function saveToStorage(data){
 
-	let size = data.length - 1;
-	sessionStorage.setItem('subredditData', JSON.stringify(data));
+	let size = data.posts.length - 1;
+	sessionStorage.setItem('subreddit', $('.searchBox').val());
+	sessionStorage.setItem('subredditData', JSON.stringify(data.posts));
+	sessionStorage.setItem('after', data.after);
 	sessionStorage.setItem('index', '0');
+	sessionStorage.setItem('size', size.toString());
+}
+
+function addOnToStorage(data){
+	
+	let size = data.posts.length - 1;
+	let prevsize = sessionStorage.getItem('size');
+	let subredditData = JSON.parse(sessionStorage.getItem('subredditData'));
+	size += parseInt(prevsize);
+	subredditData = subredditData.concat(data.posts);
+
+	sessionStorage.setItem('subredditData', JSON.stringify(subredditData));
+	sessionStorage.setItem('after', data.after);
 	sessionStorage.setItem('size', size.toString());
 }
 
@@ -125,6 +140,10 @@ function setCheckboxState(options){
 	} 
 }
 
+function getSubreddit(){
+	return sessionStorage.getItem('subreddit');
+}
+
 function getIndex(){
 	return parseInt(sessionStorage.getItem('index'));
 }
@@ -133,11 +152,16 @@ function getSize(){
 	return parseInt(sessionStorage.getItem('size'));
 }
 
+function getAfter(){
+	return sessionStorage.getItem('after');
+}
+
 function render(index){
 
 	let subredditData = JSON.parse(sessionStorage.getItem('subredditData'));
 
 	$('.errorHeader').hide();
+	$('.searchBox').css('color','white');
 	$('.details').show();
 	$('#controls').show();
 	$('h3.title').text(subredditData[index].title);
@@ -149,6 +173,7 @@ function render(index){
 
 function renderLoading(){
 
+	$('.searchBox').css('color','#45cae7');
 	$('.errorHeader').hide();
 	$('.details').show();
 	$('#controls').hide();
@@ -160,6 +185,7 @@ function renderLoading(){
 function renderError(){
 
 	$('.details').hide();
+	$('.searchBox').css('color','white');
 	$('.errorHeader').html('<i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Unable to retrieve pictures from that subreddit');
 	$('.errorHeader').fadeIn(100);
 
@@ -178,11 +204,33 @@ function nextImage(index){
 	let size = getSize();
 
 	if(index !== size){
-		index = index + 1;
-	} else { index = 0; }
 
-	sessionStorage.setItem('index', index.toString());
-	return index;
+		index = index + 1;
+		sessionStorage.setItem('index', index.toString());
+		return index;
+
+	} else if(getAfter() !== 'null') { 
+		
+		let options = getCheckboxState();
+		options.after = getAfter();
+
+		getImagesJSON(getSubreddit(), options, function(JSON){
+			//subreddit exists and it has pictures
+			if(JSON.posts){
+
+				addOnToStorage(JSON);
+				index += 1;
+				render(index);
+				sessionStorage.setItem('index', index.toString());
+				return index;
+			}
+		});
+	} else {
+
+		index = 0;
+		sessionStorage.setItem('index', index.toString());
+		return index;
+	}
 }
 
 function previousImage(index){

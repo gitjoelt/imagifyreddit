@@ -3,7 +3,12 @@ axios = require('axios');
 
 function getValues(query, options, callback){
 
-	axios.get(`https://reddit.com/r/${query}.json?limit=100`)
+	let afterQuery = '';
+	if(options.after) { 
+		afterQuery = `&after=${options.after}`;
+	}
+
+	axios.get(`https://reddit.com/r/${query}.json?limit=100${afterQuery}`)
 	.then((response) => {
 		if(response.data){
 			const pictureJSON = getImages(response.data, options);
@@ -27,6 +32,7 @@ function getImages(apiResponse, options){
 
 	if(images.length > 0){
 		
+		images = { 'after': apiResponse.data.after, 'posts': images }
 		return images;
 
 	} else { return false; }
