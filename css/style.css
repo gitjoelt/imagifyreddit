@@ -168,8 +168,11 @@ input[type="checkbox"]:checked + label span {
 
 @media only screen and (max-width: 1024px) {
 	body{
-		padding:0px 15px;
 		font-size:14px;
+	}
+
+	.onePicContainer{
+		padding:0 15px;
 	}
 
 	.btt{
@@ -196,7 +199,15 @@ input[type="checkbox"]:checked + label span {
 
 @media only screen and (max-width: 720px) {
 	body{
-		padding:0px 15px;
 		font-size:12.5px;
+	}
+
+}
+
+@media only screen and (max-width: 520px) {
+	.button{
+		margin:15px 0 0;
+		width:40%;
+		padding:12px;
 	}
 }

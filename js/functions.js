@@ -250,14 +250,12 @@ function prepareMedia(src){
 	const ext = src.substring((src.length - 3), src.length);
 
 	if(src.indexOf('gfycat.com') !== -1){
-		let mp4src = prepareGfycat(src);
-		$('.picture').html("<video preload='auto' autoplay='autoplay' loop='loop'><source src='" + mp4src + "' type='video/mp4'></video>");
+		renderGfycat(src);
 	}
 	
 
 	if(ext === "ifv"){
-		let mp4src = prepareGifv(src);
-		$('.picture').html("<video preload='auto' autoplay='autoplay' loop='loop'><source src='" + mp4src + "' type='video/mp4'></video>");
+		renderGifv(src);
 	}
 
 
@@ -268,12 +266,30 @@ function prepareMedia(src){
 	return false;
 }
 
-function prepareGifv(src){
-	let noExt = src.substring(0,(src.length - 4));
-	return noExt + 'mp4';
+function renderGifv(src){
+	const noExt = src.substring(0,(src.length - 4));
+	let mp4src = noExt + 'mp4';
+	$('.picture').html("<video preload='auto' autoplay='autoplay' loop='loop'><source src='" + mp4src + "' type='video/mp4'></video>");
 }
 
-function prepareGfycat(src){
+
+/******************************
+Cannot determine which subdomain the mp4 lives on
+So this function tries both giant and zippy subdomains
+Generally they reside on giant.gfycat.com
+******************************/
+function renderGfycat(src){
+
 	let mp4src = src.replace('gfycat.com','giant.gfycat.com');
-	return mp4src + '.mp4';
+	mp4src = mp4src + '.mp4';
+
+	$('.picture').html("<video preload='auto' autoplay='autoplay' loop='loop'><source src='" + mp4src + "' type='video/mp4'></video>");
+	$('video source').last().on('error', function() {
+
+		mp4src = src.replace('gfycat.com','zippy.gfycat.com');
+		mp4src = mp4src + '.mp4';
+		$('.picture').html("<video preload='auto' autoplay='autoplay' loop='loop'><source src='" + mp4src + "' type='video/mp4'></video>");
+
+	});
+
 }

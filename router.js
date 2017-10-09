@@ -4,8 +4,10 @@ const url = require('url');
 
 function home(request, response){
 
+	const urlData = url.parse(request.url, true);
+
 	//css
-	if(request.url.indexOf('.css') !== -1){
+	if(urlData.pathname.indexOf('.css') !== -1){
 
 		response.setHeader('Content-Type', 'text/css');
 		render.css(request, response);
@@ -14,7 +16,7 @@ function home(request, response){
 	}
 
 	//js
-	if(request.url.indexOf('.js') !== -1){
+	if(urlData.pathname.indexOf('.js') !== -1){
 
 		response.setHeader('Content-Type', 'text/javascript');
 		render.js(request, response);
@@ -22,7 +24,7 @@ function home(request, response){
 		
 	}
 
-	if(request.url === "/" && request.url.indexOf('.css') === -1 && request.url.indexOf('.js') === -1){
+	if(urlData.pathname === "/" && urlData.pathname.indexOf('.css') === -1 && urlData.pathname.indexOf('.js') === -1){
 
 		response.setHeader('Content-Type', 'text/html');
 		render.view('header', {}, response);
