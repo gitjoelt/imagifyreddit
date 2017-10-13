@@ -156,6 +156,10 @@ function getAfter(){
 	return sessionStorage.getItem('after');
 }
 
+function getDonate(){
+	return localStorage.getItem('donate');
+}
+
 function render(index){
 
 	let subredditData = JSON.parse(sessionStorage.getItem('subredditData'));
@@ -189,6 +193,15 @@ function renderError(){
 	$('.errorHeader').html('<i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Unable to retrieve pictures from that subreddit');
 	$('.errorHeader').fadeIn(100);
 
+}
+
+function renderDonate(index){
+	if(index === 35 && getDonate() !== 'shown'){
+		$('.donateHeader').fadeIn(200);
+		localStorage.setItem('donate', 'shown');
+	} else {
+		$('.donateHeader').hide();
+	}
 }
 
 function renderWarning(jQueryObject, cssClass){
@@ -275,7 +288,7 @@ function renderGifv(src){
 
 /******************************
 Cannot determine which subdomain the mp4 lives on
-So this function tries both giant and zippy subdomains
+So this function tries both giant, fat and zippy subdomains
 Generally they reside on giant.gfycat.com
 ******************************/
 function renderGfycat(src){
@@ -289,7 +302,11 @@ function renderGfycat(src){
 		mp4src = src.replace('gfycat.com','zippy.gfycat.com');
 		mp4src = mp4src + '.mp4';
 		$('.picture').html("<video preload='auto' autoplay='autoplay' loop='loop'><source src='" + mp4src + "' type='video/mp4'></video>");
-
+		$('video source').last().on('error', function() {
+			mp4src = src.replace('gfycat.com','fat.gfycat.com');
+			mp4src = mp4src + '.mp4';
+			$('.picture').html("<video preload='auto' autoplay='autoplay' loop='loop'><source src='" + mp4src + "' type='video/mp4'></video>");
+		});
 	});
 
 }

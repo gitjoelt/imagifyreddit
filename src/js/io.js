@@ -51,6 +51,7 @@ $(document).ready(function(){
 
 		let nextIndex = nextImage(getIndex());
 		render(nextIndex);
+		renderDonate(nextIndex);
 
 	});
 

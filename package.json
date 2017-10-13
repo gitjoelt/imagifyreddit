@@ -4,11 +4,28 @@
   "description": "Gets a picture from a subreddit of the users choosing",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "gulp build"
   },
   "author": "Joel",
   "license": "ISC",
   "dependencies": {
     "axios": "^0.16.2"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
+    "gulp": "^3.9.1",
+    "gulp-babel": "^7.0.0",
+    "gulp-clean-css": "^3.9.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-rename": "^1.2.2",
+    "gulp-uglify": "^3.0.0",
+    "gulp-util": "^3.0.8"
+  },
+  "babel": {
+    "presets": [
+      "es2015"
+    ]
   }
 }

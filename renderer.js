@@ -17,7 +17,12 @@ function css(request, response){
 
 	let file;
 
-	file = fs.readFileSync(`.${request.url}`);
+	try{
+		file = fs.readFileSync(`.${request.url}`);
+	} catch(e){
+		console.log(e.message);
+		return;
+	}
     response.write(file);
 
 }
@@ -26,7 +31,12 @@ function js(request, response){
 
 	let file;
 
-	file = fs.readFileSync(`.${request.url}`);
+	try{
+		file = fs.readFileSync(`.${request.url}`);
+	} catch(e){
+		console.log(e.message);
+		return;
+	}
     response.write(file);
 
 }
