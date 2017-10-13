@@ -1,11 +1,11 @@
-##Imagify Reddit
+# Imagify Reddit
 Imagify Reddit is a NodeJS web application that displays the most current images & gifs from a user defined subreddit. 
 
-##Website
+## Website
 You can view the project here 
 http://imagifyreddit.com
 
-##Setup
+## Setup
 To get started enter the following commands
 ```
 npm install
