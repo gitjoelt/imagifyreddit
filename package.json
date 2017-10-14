@@ -1,5 +1,5 @@
 {
-  "name": "redditonepic",
+  "name": "ImagifyReddit",
   "version": "1.0.0",
   "description": "Gets a picture from a subreddit of the users choosing",
   "main": "app.js",

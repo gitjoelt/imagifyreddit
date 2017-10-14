@@ -1,5 +1,5 @@
 http = require('http');
-router = require('./router.js')
+router = require('./src/server/router.js')
 
 http.createServer((request, response) => {
 

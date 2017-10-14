@@ -1,0 +1,236 @@
+body{
+	margin:0;
+	padding:0;
+	font-size:16px;
+	font-family:Verdana, Arial, sans-serif;
+	background:#e1e1e1;
+}
+
+
+h4{
+	font-size:105%;
+	margin:0 0 5px;
+}
+
+.picture, .picture img, .picture video{
+	width:100%;
+}
+
+.errorHeader{
+	background:#FF4C4C;
+	color:white;
+	padding:15px;
+	text-align:center;
+	font-weight:bold;
+	font-size:125%;
+	max-width:100%;
+	display:none;
+}
+
+.donateHeader{
+	color:white;
+	padding:15px;
+	font-size:100%;
+	max-width:100%;
+	background:#ef9e5b;
+	text-align:center;
+	display:none;
+}
+
+.donateHeader p.note{
+	font-size:130%;
+	margin:0;
+	padding-bottom:10px;
+	font-weight:bold;
+}
+.donateHeader p.address{
+	font-size:100%;
+	margin:0;
+	padding:0;
+	font-weight:bold;
+}
+
+.onePicContainer{
+	position:relative;
+	margin:15px auto;
+	max-width:960px;
+}
+
+.details{
+	background:white;
+	padding:25px 15px;
+	-webkit-border-top-left-radius: 5px;
+	-webkit-border-top-right-radius: 5px;
+	-moz-border-radius-topleft: 5px;
+	-moz-border-radius-topright: 5px;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+	display:none;
+}
+
+
+.onePicContainer h3{
+	font-size:160%;
+	color:#444;
+	margin:0;
+	padding-bottom:3px;
+}
+
+.onePicContainer p.author{
+	font-size:90%;
+	color:#666;
+	margin:0;
+}
+
+#controls{
+	text-align:right;
+}
+
+.button{
+	font-size:90%;
+	text-align:center;
+	float:right;
+	padding:15px;
+	font-weight:bold;
+	cursor:pointer;
+	margin-left:5px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	width:125px;
+}
+
+.next{
+	background:#45cae7;
+	color:white;
+}
+
+.next:hover{
+	background:#26aecc;
+}
+
+.previous{
+	background:#f5f5f5;
+	color:#555;
+}
+
+.previous:hover{
+	background:#f1f1f1;
+}
+
+.searchBox{
+	width:100%;
+	padding:20px 15px;
+	color:white;
+	background:#333;
+	font-size:160%;
+	border:none;
+	font-weight:bold;
+	margin-bottom:15px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+}
+
+.btt{
+	position:fixed;
+	right:25px;
+	bottom:0px;
+	display:block;
+	color:#666;
+	text-align:center;
+	font-size:110%;
+	margin:30px 0;
+}
+
+.preferences{
+	margin-bottom:15px;
+}
+
+.mute{
+	color:#666;
+}
+
+.mute:hover{
+	color:#444;
+}
+
+.warning{
+	display:none;
+	color:#666;
+}
+
+
+/*checkbox 
+Source: https://webdesign.tutsplus.com/articles/quick-tip-easy-css3-checkboxes-and-radio-buttons--webdesign-8953
+*/
+input[type="checkbox"] {
+    display:none;
+}
+
+input[type="checkbox"] + label {
+    color:#666;
+    font-weight:bold;
+    padding-right:8px;
+}
+
+input[type="checkbox"] + label span {
+    display:inline-block;
+    width:19px;
+    height:19px;
+    margin:-2px 5px 0 0;
+    vertical-align:middle;
+    background:url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/210284/check_radio_sheet.png) left top no-repeat;
+    cursor:pointer;
+}
+
+input[type="checkbox"]:checked + label span {
+    background:url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/210284/check_radio_sheet.png) -19px top no-repeat;
+}
+
+
+@media only screen and (max-width: 1024px) {
+	body{
+		font-size:14px;
+	}
+
+	.onePicContainer{
+		padding:0 15px;
+	}
+
+	.btt{
+		position:relative;
+		right:0;
+		bottom:0;
+		display:block;
+		margin:25px auto 25px 0;
+	}
+
+	.button{
+		margin:15px 0 0;
+		width:40%;
+		float:none;
+	}
+
+	.next{
+		float:right;
+	}
+	.previous{
+		float:left;
+	}
+}
+
+@media only screen and (max-width: 720px) {
+	body{
+		font-size:12.5px;
+	}
+
+}
+
+@media only screen and (max-width: 520px) {
+	.button{
+		margin:15px 0 0;
+		width:40%;
+		padding:12px;
+	}
+}

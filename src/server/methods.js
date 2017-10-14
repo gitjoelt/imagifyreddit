@@ -96,4 +96,13 @@ function pickRandom(pictureArray){
 	return Math.floor(Math.random() * ((pictureArray.length - 1) - 0) + 0);
 }
 
+function importDonationConfig(path){
+	try{
+		return require(path);
+	} catch(e){
+		return {};
+	}
+}
+
 module.exports.getValues = getValues;
+module.exports.importDonationConfig = importDonationConfig;

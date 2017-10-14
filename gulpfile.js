@@ -13,25 +13,29 @@ gulp.task("concatScripts", function() {
 		'./src/js/functions.js',
 		'./src/js/io.js'])
 		.pipe(concat('bundle.js'))
-		.pipe(gulp.dest('./'));
+		.pipe(gulp.dest('./dist/js'));
 });
 
 gulp.task("minifyScripts", ["concatScripts"], function() {
-	gulp.src("./bundle.js")
+	gulp.src("./dist/js/bundle.js")
 		.pipe(babel({
 			presets: ['es2015']
 		}))
 		.pipe(uglify())
 		.on('error', (err) => { util.log(util.colors.red('[Error]'), err.toString()); })
 		.pipe(rename('bundle.min.js'))
-		.pipe(gulp.dest('./'));
+		.pipe(gulp.dest('./dist/js'));
 });
 
 gulp.task("minifyCSS", function() {
-	gulp.src('./src/css/*.css')
+	
+	gulp.src('./src/css/style.css')
+		.pipe(gulp.dest('./dist/css'));
+
+	gulp.src('./src/css/style.css')
 		.pipe(cleancss())
 		.pipe(rename('style.min.css'))
-		.pipe(gulp.dest('./src/css'));
+		.pipe(gulp.dest('./dist/css'));
 });
 
 gulp.task("build",["concatScripts", "minifyScripts", "minifyCSS"]);
