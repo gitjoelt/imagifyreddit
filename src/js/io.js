@@ -5,11 +5,11 @@ $(document).ready(function(){
 	Init
 	******************************/
 
-	let next = $('.next');
-	let prev = $('.previous');
-	let gifv = $('#gifv');
-	let gfy = $('#gfy');
-	let sfw = $('#sfw');
+	const next = $('.next');
+	const prev = $('.previous');
+	const gifv = $('#gifv');
+	const gfy = $('#gfy');
+	const sfw = $('#sfw');
 	let checkboxes = $('input[type=checkbox]');
 	let options = getCheckboxStateFromStorage();
 	setCheckboxState(options);
@@ -49,7 +49,7 @@ $(document).ready(function(){
 
 	next.click(function(){
 
-		let nextIndex = nextImage(getIndex());
+		const nextIndex = nextImage(getIndex());
 		render(nextIndex);
 		renderDonate(nextIndex);
 
@@ -57,14 +57,14 @@ $(document).ready(function(){
 
 	prev.click(function(){
 
-		let prevIndex = previousImage(getIndex());
+		const prevIndex = previousImage(getIndex());
 		render(prevIndex);
 
 	});
 
 	checkboxes.click(function(){
 		
-		let input = $('.searchBox').val();
+		const input = $('.searchBox').val();
 		options = getCheckboxState();
 		saveCheckboxState(options);
 

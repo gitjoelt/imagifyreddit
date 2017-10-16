@@ -59,7 +59,7 @@ function generateUrlParameters(options){
 
 function isStored(){
 
-	let storage = sessionStorage.getItem('subredditData');
+	const storage = sessionStorage.getItem('subredditData');
 	if(storage){
 		return true;
 	} else { return false; }
@@ -68,7 +68,7 @@ function isStored(){
 
 function saveToStorage(data){
 
-	let size = data.posts.length - 1;
+	const size = data.posts.length - 1;
 	sessionStorage.setItem('subreddit', $('.searchBox').val());
 	sessionStorage.setItem('subredditData', JSON.stringify(data.posts));
 	sessionStorage.setItem('after', data.after);
@@ -78,9 +78,10 @@ function saveToStorage(data){
 
 function addOnToStorage(data){
 	
+	const prevsize = sessionStorage.getItem('size');
 	let size = data.posts.length - 1;
-	let prevsize = sessionStorage.getItem('size');
 	let subredditData = JSON.parse(sessionStorage.getItem('subredditData'));
+
 	size += parseInt(prevsize);
 	subredditData = subredditData.concat(data.posts);
 
@@ -162,7 +163,7 @@ function getDonate(){
 
 function render(index){
 
-	let subredditData = JSON.parse(sessionStorage.getItem('subredditData'));
+	const subredditData = JSON.parse(sessionStorage.getItem('subredditData'));
 
 	$('.errorHeader').hide();
 	$('.searchBox').css('color','white');
@@ -214,11 +215,11 @@ function renderWarning(jQueryObject, cssClass){
 
 function nextImage(index){
 
-	let size = getSize();
+	const size = getSize();
 
 	if(index !== size){
 
-		index = index + 1;
+		index += 1;
 		sessionStorage.setItem('index', index.toString());
 		return index;
 
@@ -248,10 +249,10 @@ function nextImage(index){
 
 function previousImage(index){
 	
-	let size = getSize();
+	const size = getSize();
 
 	if(index !== 0){
-		index = index - 1;
+		index -= 1;
 	} else { index = size; }
 
 	sessionStorage.setItem('index', index.toString());
@@ -281,7 +282,7 @@ function prepareMedia(src){
 
 function renderGifv(src){
 	const noExt = src.substring(0,(src.length - 4));
-	let mp4src = noExt + 'mp4';
+	const mp4src = noExt + 'mp4';
 	$('.picture').html("<video preload='auto' autoplay='autoplay' loop='loop'><source src='" + mp4src + "' type='video/mp4'></video>");
 }
 

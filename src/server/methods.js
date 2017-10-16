@@ -96,7 +96,7 @@ function pickRandom(pictureArray){
 	return Math.floor(Math.random() * ((pictureArray.length - 1) - 0) + 0);
 }
 
-function importDonationConfig(path){
+function requireDonationConfig(path){
 	try{
 		return require(path);
 	} catch(e){
@@ -105,4 +105,4 @@ function importDonationConfig(path){
 }
 
 module.exports.getValues = getValues;
-module.exports.importDonationConfig = importDonationConfig;
+module.exports.requireDonationConfig = requireDonationConfig;

@@ -1,29 +1,21 @@
 const render = require('./renderer.js');
 const lib = require('./methods.js');
 const url = require('url');
-const donate = lib.importDonationConfig('../../donateconfig.json');
+const donate = lib.requireDonationConfig('../../donateconfig.json');
 
 function home(request, response){
 
 	const urlData = url.parse(request.url, true);
 
-	//css
-	if(urlData.pathname.indexOf('.css') !== -1){
+	//css & js
+	if(urlData.pathname.indexOf('.css') !== -1 || urlData.pathname.indexOf('.js') !== -1){
 
 		response.setHeader('Content-Type', 'text/css');
-		render.css(request, response);
+		render.asset(request, response);
 		response.end();
 
 	}
 
-	//js
-	if(urlData.pathname.indexOf('.js') !== -1){
-
-		response.setHeader('Content-Type', 'text/javascript');
-		render.js(request, response);
-		response.end();
-		
-	}
 
 	if(urlData.pathname === "/" && urlData.pathname.indexOf('.css') === -1 && urlData.pathname.indexOf('.js') === -1){
 

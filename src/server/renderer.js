@@ -13,35 +13,19 @@ function view(template, values, response){
 	response.write(file + '\n');
 }
 
-function css(request, response){
-
-	let file;
+function asset(request, response){
 
 	try{
-		file = fs.readFileSync(`.${request.url}`);
+		const file = fs.readFileSync(`.${request.url}`);
+		response.write(file);
 	} catch(e){
-		console.log(e.message);
-		return;
+
+		return false;
 	}
-    response.write(file);
-
-}
-
-function js(request, response){
-
-	let file;
-
-	try{
-		file = fs.readFileSync(`.${request.url}`);
-	} catch(e){
-		console.log(e.message);
-		return;
-	}
-    response.write(file);
+    
 
 }
 
 
 module.exports.view = view;
-module.exports.css = css;
-module.exports.js = js;
+module.exports.asset = asset;
