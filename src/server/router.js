@@ -1,7 +1,6 @@
 const render = require('./renderer.js');
 const lib = require('./methods.js');
 const url = require('url');
-const donate = lib.requireDonationConfig('../../donateconfig.json');
 
 function home(request, response){
 
@@ -22,9 +21,6 @@ function home(request, response){
 		response.setHeader('Content-Type', 'text/html');
 		render.view('header', {}, response);
 		render.view('overlay', {}, response);
-		/*if(donate.btc){
-			render.view('donate', donate, response);
-		}*/
 		render.view('error', {}, response);
 		render.view('image', {}, response);
 		render.view('footer', {}, response);

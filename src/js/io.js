@@ -6,6 +6,7 @@ $(document).ready(function(){
 	******************************/
 
 	const overlay = $('.mainoverlay');
+	const picture = $('.picture');
 	const close = $('.close');
 	const next = $('.next');
 	const prev = $('.previous');
@@ -86,6 +87,26 @@ $(document).ready(function(){
 			});
 		}
 
+	});
+
+	picture.click(function(){
+		
+		if($('.mainoverlay').hasClass('fullscreen')){
+			$('.overlaycontrols').show();
+			$('.redditinfo').show();
+			$('.close').show();
+			$('.mainoverlay').removeClass('fullscreen');
+			$('.media').removeClass('media-fullscreen');
+			$('.picture').removeClass('picture-fullscreen');
+
+		} else {
+			$('.overlaycontrols').hide();
+			$('.redditinfo').hide();
+			$('.close').hide();
+			$('.mainoverlay').addClass('fullscreen');
+			$('.media').addClass('media-fullscreen');
+			$('.picture').addClass('picture-fullscreen');
+		}
 	});
 
 	close.click(function(){
