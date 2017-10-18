@@ -21,9 +21,10 @@ function home(request, response){
 
 		response.setHeader('Content-Type', 'text/html');
 		render.view('header', {}, response);
-		if(donate.btc){
+		render.view('overlay', {}, response);
+		/*if(donate.btc){
 			render.view('donate', donate, response);
-		}
+		}*/
 		render.view('error', {}, response);
 		render.view('image', {}, response);
 		render.view('footer', {}, response);

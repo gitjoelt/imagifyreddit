@@ -170,7 +170,7 @@ function render(index){
 	$('.details').show();
 	$('#controls').show();
 	$('h3.title').text(subredditData[index].title);
-	$('p.author').text('Posted by: ' + subredditData[index].author);
+	$('p.subreddit').text('r/' + getSubreddit());
 	
 	prepareMedia(subredditData[index].imgsrc);
 	$('.picture').show();
@@ -178,21 +178,24 @@ function render(index){
 
 function renderLoading(){
 
+	$('.mainoverlay').fadeIn(100);
 	$('.searchBox').css('color','#45cae7');
 	$('.errorHeader').hide();
 	$('.details').show();
 	$('#controls').hide();
 	$('h3.title').html('<i class="fa fa-spin fa-circle-o-notch" aria-hidden="true"></i> Gathering Images...');
-	$('p.author').text('');
+	$('p.subreddit').text('');
 	$('.picture').hide();
 }
 
 function renderError(){
 
+	$('.mainoverlay').hide();
 	$('.details').hide();
 	$('.searchBox').css('color','white');
 	$('.errorHeader').html('<i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Unable to retrieve pictures from that subreddit');
 	$('.errorHeader').fadeIn(100);
+	$('.searchBox').select();
 
 }
 

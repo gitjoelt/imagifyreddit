@@ -5,6 +5,8 @@ $(document).ready(function(){
 	Init
 	******************************/
 
+	const overlay = $('.mainoverlay');
+	const close = $('.close');
 	const next = $('.next');
 	const prev = $('.previous');
 	const gifv = $('#gifv');
@@ -84,6 +86,11 @@ $(document).ready(function(){
 			});
 		}
 
+	});
+
+	close.click(function(){
+		overlay.hide();
+		$('.searchBox').select();
 	});
 
 	if($(window).width() > 1024){

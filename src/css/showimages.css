@@ -1,0 +1,126 @@
+
+.mainoverlay{
+	background:#222937;
+	width:100%;
+	height:100%;
+	padding:0;
+	margin:0;
+	position:fixed;
+	top:0;
+	left:0;
+	display:none;
+	z-index:50;
+}
+
+
+.mainoverlay div.media {
+	
+	position:absolute;
+	top:50%;
+	left:50%;
+	transform: translate(-50%,-50%);
+}
+
+.picture, .picture img, .picture video{
+	max-height: calc(100vh - 170px);
+    max-width: calc(100vw - 120px);
+}
+
+.redditInfo{
+	position:absolute;
+	left:0;
+	top:20px;
+	color:#71747c;
+	max-width:90vw;
+	padding-left:20px;
+}
+.close{
+	position:absolute;
+	right:0;
+	top:20px;
+	color:#71747c;
+	font-size:200%;
+	width:60px;
+	cursor:pointer;
+}
+.close:hover{
+	color:white;
+}
+
+.overlaycontrols{
+	position:fixed;
+	width:100%;
+	bottom:0;
+}
+
+.overlaycontrols > div{
+	
+}
+
+h3.title {
+	font-size:1.4em;
+	color:white;
+	margin:0;
+	padding-bottom:3px;
+}
+
+p.subreddit{
+	font-size:1em;
+	color:#45cae7;
+	margin:0;
+	font-weight:bold;
+}
+
+
+.button{
+	font-size:90%;
+	text-align:center;
+	float:left;
+	padding:15px;
+	font-weight:bold;
+	cursor:pointer;
+	width:100%;
+	display:block;
+}
+
+.next{
+	background:#45cae7;
+	color:white;
+}
+
+.next:hover{
+	background:#26aecc;
+}
+
+.previous{
+	background:#f5f5f5;
+	color:#555;
+}
+
+.previous:hover{
+	background:#f1f1f1;
+}
+
+
+@media only screen and (max-width: 520px) {
+
+	h3.title {
+		font-size:1.6em;
+		color:white;
+		margin:0;
+		padding-bottom:3px;
+	}
+
+	p.subreddit{
+		font-size:1.2em;
+		color:#45cae7;
+		margin:0;
+		font-weight:bold;
+	}
+
+	.picture, .picture img, .picture video{
+		max-height: calc(100vh - 60px);
+	    max-width: calc(100vw - 30px);
+	}
+
+}

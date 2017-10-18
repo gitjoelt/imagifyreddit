@@ -4,6 +4,7 @@ body{
 	font-size:16px;
 	font-family:Verdana, Arial, sans-serif;
 	background:#e1e1e1;
+	position:relative;
 }
 
 
@@ -13,7 +14,7 @@ h4{
 }
 
 .picture, .picture img, .picture video{
-	width:100%;
+	/*width:100%;*/
 }
 
 .errorHeader{
@@ -69,53 +70,8 @@ h4{
 }
 
 
-.onePicContainer h3{
-	font-size:160%;
-	color:#444;
-	margin:0;
-	padding-bottom:3px;
-}
-
-.onePicContainer p.author{
-	font-size:90%;
-	color:#666;
-	margin:0;
-}
-
 #controls{
 	text-align:right;
-}
-
-.button{
-	font-size:90%;
-	text-align:center;
-	float:right;
-	padding:15px;
-	font-weight:bold;
-	cursor:pointer;
-	margin-left:5px;
-	-webkit-border-radius: 5px;
-	-moz-border-radius: 5px;
-	border-radius: 5px;
-	width:125px;
-}
-
-.next{
-	background:#45cae7;
-	color:white;
-}
-
-.next:hover{
-	background:#26aecc;
-}
-
-.previous{
-	background:#f5f5f5;
-	color:#555;
-}
-
-.previous:hover{
-	background:#f1f1f1;
 }
 
 .searchBox{
@@ -198,26 +154,6 @@ input[type="checkbox"]:checked + label span {
 		padding:0 15px;
 	}
 
-	.btt{
-		position:relative;
-		right:0;
-		bottom:0;
-		display:block;
-		margin:25px auto 25px 0;
-	}
-
-	.button{
-		margin:15px 0 0;
-		width:40%;
-		float:none;
-	}
-
-	.next{
-		float:right;
-	}
-	.previous{
-		float:left;
-	}
 }
 
 @media only screen and (max-width: 720px) {
@@ -228,9 +164,5 @@ input[type="checkbox"]:checked + label span {
 }
 
 @media only screen and (max-width: 520px) {
-	.button{
-		margin:15px 0 0;
-		width:40%;
-		padding:12px;
-	}
+
 }

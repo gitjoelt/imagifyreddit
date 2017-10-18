@@ -29,12 +29,12 @@ gulp.task("minifyScripts", ["concatScripts"], function() {
 
 gulp.task("minifyCSS", function() {
 	
-	gulp.src('./src/css/style.css')
-		.pipe(gulp.dest('./dist/css'));
+	/*gulp.src('./src/css/style.css')
+		.pipe(gulp.dest('./dist/css'));*/
 
-	gulp.src('./src/css/style.css')
+	gulp.src('./src/css/*.css')
 		.pipe(cleancss())
-		.pipe(rename('style.min.css'))
+		.pipe(concat('style.min.css'))
 		.pipe(gulp.dest('./dist/css'));
 });
 
