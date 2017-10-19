@@ -143,8 +143,8 @@ p.subreddit{
 	}
 
 	.picture, .picture img, .picture video{
-		max-height: calc(100vh - 150px);
-	    max-width: calc(100vw - 80px);
+		max-height: calc(100vh - 180px);
+	    max-width: calc(100vw - 50px);
 	}
 
 }
