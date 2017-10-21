@@ -111,6 +111,7 @@ $(document).ready(function(){
 
 	close.click(function(){
 		overlay.hide();
+		$('.searchBox').val('');
 		$('.searchBox').select();
 	});
 
